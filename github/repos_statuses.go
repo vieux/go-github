@@ -65,11 +65,11 @@ func (s *RepositoriesService) ListStatuses(ctx context.Context, owner, repo, ref
 }
 
 // CreateStatus creates a new status for a repository at the specified
-// reference. Ref can be a SHA, a branch name, or a tag name.
+// SHA.
 //
 // GitHub API docs: https://developer.github.com/v3/repos/statuses/#create-a-status
-func (s *RepositoriesService) CreateStatus(ctx context.Context, owner, repo, ref string, status *RepoStatus) (*RepoStatus, *Response, error) {
-	u := fmt.Sprintf("repos/%v/%v/statuses/%v", owner, repo, ref)
+func (s *RepositoriesService) CreateStatus(ctx context.Context, owner, repo, sha string, status *RepoStatus) (*RepoStatus, *Response, error) {
+	u := fmt.Sprintf("repos/%v/%v/statuses/%v", owner, repo, sha)
 	req, err := s.client.NewRequest("POST", u, status)
 	if err != nil {
 		return nil, nil, err
